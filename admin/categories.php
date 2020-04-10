@@ -88,6 +88,17 @@
 
 
                 <div class="col-xs-6"> 
+                    <?php 
+                    if(isset($_POST['submit'])){
+                    $cat_title = $_POST["cat_title"];
+                        if($cat_title == '' || empty($cat_title)){
+                            echo "Field should not be empty";
+                        }
+
+                    }
+                    
+                    ?>
+
                     <form action="categories.php" method= "post">
                           <div class="form-group">
                           <label for="cat-title">Enter a Category</label>
@@ -97,6 +108,31 @@
                           </div>
                     </form>
                 </div> 
+                <div class="col-xs-6">
+                <?php  
+                    $query = "SELECT * FROM categories";
+                    $fetchAllRecords = mysqli_query($connection , $query);   //execute the query 
+                ?>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while($row = mysqli_fetch_assoc($fetchAllRecords)){   //fetch records from db
+                    $cat_id = $row['cat_id']; 
+                    $cat_title = $row['cat_title']; 
+                    echo "<li><td>{$cat_id}</td></li>";   //show the records
+                    echo "<li><td>{$cat_title}</td></li>";   //show the records
+                    echo "<tr>";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                </div>
             </div>
             <!-- /.container-fluid -->
         </div>
