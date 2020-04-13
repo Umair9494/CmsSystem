@@ -1,8 +1,8 @@
-<?php ob_start();  //functionality for starting or reloading a page    ?> 
 <?php include 'includes/header.php'; ?>
     <div id="wrapper">
         <!-- Navigation -->
 <?php include 'includes/navigation.php'; ?>
+
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -40,15 +40,15 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="posts.php">View All Posts</a>
                             </li>
                             <li>
-                                <a href="#">Dropdown Item</a>
+                                <a href="#">Add Post</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Categories </a>
+                        <a href="categories.php"><i class="fa fa-fw fa-edit"></i> Categories </a>
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Comments </a>
@@ -84,45 +84,27 @@
                         </h1>
                     </div>
                 </div>
-                <!-- /.row -->
-
-                <div class="col-xs-6"> 
-                   <?php insert_categories(); ?>
-                    <form action="categories.php" method= "post">
-                          <div class="form-group">
-                          <label for="cat-title">Enter a Category</label>
-                               <input type="text" name="cat_title" class="form-control" >
-                               <input type="submit" class="btn btn-primary" name="submit" value="Add Category">
-                               <br/><br/>
-                          </div>
-                    </form>
-
-                    <?php 
-                    if(isset($_GET['edit']))
-                    {
-                        $cat_id = $_GET['edit'];
-                        include "includes/update_categories.php";
-                    }
-                    ?>
-                </div> 
-                <div class="col-xs-6">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Category Title</th>
-                            <th>Operations</th>
-                            <th>Updation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php showCategories(); ?>
-                    <?php deleteCategories(); ?>
-                    </tbody>
-                </table>
-                </div>
             </div>
             <!-- /.container-fluid -->
-        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Author</td>
+                    <td>Title</td>
+                    <td>Category</td>
+                    <td>Status</td>
+                    <td>Image</td>
+                    <td>Tags</td>
+                    <td>Comments</td>
+                    <td>Date</td>
+                </tr>
+            </thead>
+            <tbody>
+            <?php showPosts(); ?>
+            </tbody>
+        </table>
+    </div>
+    
         <!-- /#page-wrapper -->
 <?php include 'includes/footer.php'; ?>
