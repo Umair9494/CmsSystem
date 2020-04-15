@@ -86,24 +86,34 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Author</td>
-                    <td>Title</td>
-                    <td>Category</td>
-                    <td>Status</td>
-                    <td>Image</td>
-                    <td>Tags</td>
-                    <td>Comments</td>
-                    <td>Date</td>
-                </tr>
-            </thead>
-            <tbody>
-            <?php showPosts(); ?>
-            </tbody>
-        </table>
+        <?php 
+        if(isset($_GET['source'])){
+          $source = $_GET['source']; 
+        }
+        else{
+            $source = '';
+        }
+        switch($source){ 
+        case 'add_post':
+            include "includes/add_new_post.php";
+        break;
+        case '2':
+            echo "nice 2";
+        break;
+        case '3':
+            echo "nice 3";
+        break;
+        case '4':
+            echo "nice 4";
+        break;
+        case '5':
+            echo "nice 5";
+        break;
+        default:
+        include "includes/view_all_posts.php";
+        break;
+        }
+        ?>
     </div>
     
         <!-- /#page-wrapper -->

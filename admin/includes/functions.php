@@ -1,5 +1,5 @@
 <?php
-function insert_categories(){ 
+function insert_categories(){  //insert categories 
         global $connection; 
         if(isset($_POST['submit']))
         {
@@ -18,7 +18,7 @@ function insert_categories(){
         }
         }
 
-function showCategories(){
+function showCategories(){   //showing categories
         global $connection;
         $query = "SELECT * FROM categories";
         $fetchAllRecords = mysqli_query($connection , $query);   //execute the query 
@@ -33,7 +33,7 @@ function showCategories(){
         }
         }
 
-function deleteCategories(){
+function deleteCategories(){  //deleting categories
         global $connection;
         //deleting categories
         if(isset($_GET['delete'])){
@@ -44,7 +44,8 @@ function deleteCategories(){
         }
 }
 
-function showPosts(){
+function showPosts() //showing data of all posts 
+{
     global $connection;
     $query = "SELECT * FROM posts";
     $fetchAllposts = mysqli_query($connection , $query);   //execute the query 
