@@ -10,9 +10,21 @@
                     <td>Tags</td>
                     <td>Comments</td>
                     <td>Date</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
                 </tr>
             </thead>
             <tbody>
             <?php showPosts(); ?>
             </tbody>
 </table>
+<?php 
+if(isset($_GET['delete'])){
+    $post_id = $_GET['delete'];
+    $query = "DELETE FROM posts where post_id = $post_id";
+    $queryDelete = mysqli_query($connection, $query);
+    if(!$queryDelete){
+        echo "Query Failed!" . mysqli_error($connection);
+    }
+}
+?>

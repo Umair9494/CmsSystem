@@ -8,13 +8,12 @@ if(isset($_POST['create_post'])){
     $post_image_tmp = $_FILES['image']['tmp_name']; 
     $post_tags = $_POST['tags']; 
     $post_content = $_POST['post_content'];
-    $post_comment_count = 4; //$_POST['post_comment_count']  
     $post_date = date('d-m-y'); 
 
     move_uploaded_file($post_image_tmp,"../images/$post_image"); //move upload function from temporary location to the stored locationed file
-
-    $query = "INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_comment_count,post_status)";
-    $query.= "VALUES ({$post_category_id},'{$post_title}','{$post_author}', now() ,'{$post_image}','{$post_content}', '{$post_tags}','{$post_comment_count}','{$post_status}')";
+    
+    $query = "INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status)";
+    $query.= "VALUES ({$post_category_id},'{$post_title}','{$post_author}', now() ,'{$post_image}','{$post_content}', '{$post_tags}','{$post_status}')";
     $addPost = mysqli_query($connection,$query);
     if(!$addPost){
         echo "Query Failed !" . mysqli_error($connection);

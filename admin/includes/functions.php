@@ -64,16 +64,70 @@ function showPosts() //showing data of all posts
         echo "<td> $post_id </td>";
         echo "<td> $post_author </td>";
         echo "<td> $post_title </td>";
-        echo "<td> $post_category_id </td>";
+        $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
+        $fetchAllRecords = mysqli_query($connection , $query);   //execute the query 
+        while($row = mysqli_fetch_assoc($fetchAllRecords)){   //fetch records from db
+        $cat_id = $row['cat_id']; 
+        $cat_title = $row['cat_title']; 
+        }
+        echo "<td> {$cat_title} </td>";
         echo "<td> $post_status </td>"; 
         echo "<td> <img width='100' class='img-responsive' src='../images/$post_image' alt='image'> </td>";
         echo "<td> $post_tags </td>";
         echo "<td> $post_comment_count </td>";
         echo "<td> $post_date </td>";
+        echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
+        echo "<td><a href='posts.php?delete={$post_id}'>Delete</a></td>";       
     echo "</tr>";
     }
 
+    
 }
+function showComments() //showing data of all posts 
+{
+    global $connection;
+    $query = "SELECT * FROM comments";
+    $fetchComments = mysqli_query($connection , $query);   //execute the query 
+    while($row = mysqli_fetch_assoc($fetchComments)){   //fetch records from db
+    $comment_id = $row['comment_id']; 
+    $comment_post_id = $row['comment_post_id']; 
+    $comment_author = $row['comment_author']; 
+    $comment_content = $row['comment_content'];
+    $comment_email = $row['comment_email'];  
+    $comment_status = $row['comment_status']; 
+    $comment_date = $row['comment_date']; 
+    
+        echo "<tr>";
+        echo "<td> $comment_id </td>";
+        // echo "<td> $comment_post_id  </td>";
+        echo "<td> $comment_author </td>";
+        echo "<td> $comment_content </td>";
+        // $query = "SELECT * FROM comments";
+        // $fetchAllRecords = mysqli_query($connection , $query);   //execute the query 
+        // while($row = mysqli_fetch_assoc($fetchAllRecords)){   //fetch records from db
+        // $cat_id = $row['cat_id']; 
+        // $cat_title = $row['cat_title']; 
+        // }
+        echo "<td> $comment_email </td>";
+        echo "<td> $comment_status </td>"; 
+
+        $queryPostComment = "SELECT * FROM posts WHERE post_id = $comment_post_id ";
+        $queryComment = mysqli_query($connection,$queryPostComment);
+        while($row = mysqli_fetch_assoc($queryComment)){
+            $post_id = $row['post_id'];
+            $post_title = $row['post_title'];
+            echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
+        }
+
+        echo "<td> $comment_date </td>";
+        echo "<td><a href='comments.php?approve=$comment_id'>Approve</a></td>";
+        echo "<td><a href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";       
+        // echo "<td><a href='posts.php?source=edit_post&p_id='>Edit</a></td>";
+        echo "<td><a href='comments.php?deleteComment=$comment_id'>Delete</a></td>";       
+        echo "</tr>";
+    }
+}
+
  ?>
 
 
