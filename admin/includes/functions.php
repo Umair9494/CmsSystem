@@ -127,7 +127,43 @@ function showComments() //showing data of all posts
         echo "</tr>";
     }
 }
+function showUsers() //showing data of all posts 
+{
+    global $connection;
+    $query = "SELECT * FROM users";
+    $fetchAllusers = mysqli_query($connection , $query);   //execute the query 
+    while($row = mysqli_fetch_assoc($fetchAllusers)){   //fetch records from db
+    $user_id = $row['user_id']; 
+    $username = $row['username'];  
+    $user_firstname = $row['user_firstname']; 
+    $user_lastname = $row['user_lastname']; 
+    $user_email = $row['user_email']; 
+    // $user_image = $row['user_image']; 
+    $user_role = $row['user_role']; 
 
+    echo "<tr>";
+        echo "<td> $user_id </td>";
+        echo "<td> $username </td>";
+        echo "<td> $user_firstname </td>";
+        // $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
+        // $fetchAllRecords = mysqli_query($connection , $query);   //execute the query 
+        // while($row = mysqli_fetch_assoc($fetchAllRecords)){   //fetch records from db
+        // $cat_id = $row['cat_id']; 
+        // $cat_title = $row['cat_title']; 
+        // }
+        echo "<td> $user_lastname </td>";
+        echo "<td> $user_email </td>"; 
+        // echo "<td> <img width='100' class='img-responsive' src='../images/$user_image' alt='image'> </td>";
+        echo "<td> $user_role </td>";
+        // echo "<td> $post_comment_count </td>";
+        // echo "<td> $post_date </td>";
+        echo "<td><a href='users.php?change_to_admin={$user_id}'>Admin</a></td>";
+        echo "<td><a href='users.php?change_to_subscriber={$user_id}'>Subscriber</a></td>";
+        echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
+        echo "<td><a href='users.php?deleteUsers={$user_id}'>Delete</a></td>";       
+    echo "</tr>";
+    }   
+}
  ?>
 
 
